@@ -7,10 +7,10 @@ import { ReactComponent as ShoppingBag } from "../../assets/_icons/shopping-bag.
 
 import "./cart-icon.styles.scss";
 
-const CartIcon = ({ toggleCartHidden }) => (
+const CartIcon = ({ toggleCartHidden, itemsCount = 0 }) => (
   <div className="cart-icon" onClick={toggleCartHidden}>
     <ShoppingBag className="shopping-icon" />
-    <span className="item-count">0</span>
+    <span className="item-count">{itemsCount}</span>
   </div>
 );
 
@@ -18,4 +18,12 @@ const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
-export default connect(null, mapDispatchToProps)(CartIcon);
+//selector! - NOT GOOD FOR PERFORMANCE BECAUSE TRIGGERED ON EACH STIRE CHANGE
+const mapStateToProps = ({ cart: { cartItems } }) => ({
+  itemsCount: cartItems.reduce(
+    (accumilatedQuantity, cartItem) => accumilatedQuantity + cartItem.quantity,
+    0
+  )
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
