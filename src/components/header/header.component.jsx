@@ -6,6 +6,10 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 import { ReactComponent as Logo } from "../../assets/_icons/crown.svg";
 
+import { createStructuredSelector } from "reselect";
+import { selectCartHidden } from "../../_store/cart/cart.selectors";
+import { selectCurrentUser } from "../../_store/user/user.selectors";
+
 import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
@@ -40,9 +44,10 @@ const Header = ({ currentUser, hidden }) => (
 );
 
 //allows us to access the state the state being reducer
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden
+//instead of passing state again and again using createStructuredSelector
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
