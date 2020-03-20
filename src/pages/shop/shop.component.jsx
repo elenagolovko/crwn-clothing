@@ -6,13 +6,13 @@ import { Route } from "react-router-dom";
 import CollectionContainer from "../collection/collection.container";
 import CollectionsOverviewContainer from "../../components/collection-overview/collection-overview.container";
 
-import { fetchCollectionsStartAsync } from "../../_store/shop/shop.actions";
+import { fetchCollectionsStart } from "../../_store/shop/shop.actions";
 
 class Shop extends Component {
   componentDidMount() {
-    const { fetchCollectionsStartAsync } = this.props;
+    const { fetchCollectionsStart } = this.props;
 
-    fetchCollectionsStartAsync();
+    fetchCollectionsStart();
   }
 
   render() {
@@ -34,7 +34,7 @@ class Shop extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export default connect(null, mapDispatchToProps)(Shop);
