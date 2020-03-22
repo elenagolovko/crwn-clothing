@@ -12,8 +12,6 @@ import { signOutStart } from "../../_store/user/user.actions";
 
 import { connect } from "react-redux";
 
-import { auth } from "../../firebase/firebase.utils";
-
 import {
   HeaderContainer,
   OptionLink,
